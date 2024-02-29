@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="finalproject.css">
+    <title>Add Class Page</title>
+</head>
+<body>
+    <div id="wrapper">
+        <header>
+            <h1>Final Project</h1>
+            <img src="" alt="">
+        </header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="classes.html">Classes</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <form id="addClassForm" onsubmit="addNewClass(event)">
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" required>
+
+                <label for="className">Class Name:</label>
+                <input type="text" id="className" name="className" required>
+
+                <label for="teacherName">Teacher Name:</label>
+                <input type="text" id="teacherName" name="teacherName" required>
+
+                <label for="classDescription">Class Description:</label>
+                <textarea id="classDescription" name="classDescription" required></textarea>
+
+                <label for="classPhoto">Class Photo (Optional):</label>
+                <input type="file" id="classPhoto" name="classPhoto" accept="image/*">
+
+                <button type="submit">Add Class</button>
+            </form>
+        </main>
+
+        <footer>
+            &copy; 2024 <span class="project">final project</span><br>
+            <span>Derek Wayne Kolb, Charles Skylar Hickel, Olivia Stanich</span>
+        </footer>
+    </div>
+
+    <script>
+    function addNewClass(event) {
+        event.preventDefault();
+
+        const subject = document.getElementById('subject').value;
+        const className = document.getElementById('className').value;
+        const teacherName = document.getElementById('teacherName').value;
+        const classDescription = document.getElementById('classDescription').value;
+
+       
+        const existingClasses = JSON.parse(localStorage.getItem('classListData')) || [];
+
+        const newClassId = existingClasses.length + 1;
+        const newClass = {
+            id: newClassId,
+            subject: subject,
+            name: className,
+            teacher: teacherName,
+            description: classDescription,
+        };
+
+        existingClasses.push(newClass);
+
+        localStorage.setItem('classListData', JSON.stringify(existingClasses));
+
+        window.location.href = 'classes.html';
+    }
+</script>
+
+</body>
+</html>
